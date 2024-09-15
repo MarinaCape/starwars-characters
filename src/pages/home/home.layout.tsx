@@ -1,21 +1,33 @@
-import { Grid2 } from '@mui/material';
-import { useCharacter } from '../../hooks/useCharacter';
+import { Box, CircularProgress, Grid2, Typography } from '@mui/material';
 import CharacterItemComponent from './components/character-item.component';
 import { CharactersContainer, HomeContainer, TitleStyled } from './home.styles';
-import SearchComponent from '../../core/search.component';
+import SearchComponent from '../../core/search/search.component';
 import { useState } from 'react';
+import { useGetCharactersQuery } from '../../store/services/characters-api';
+import PaginationComponent from '../../core/pagination/pagination.component';
+import { Character } from '../../models/character';
 
 const HomeLayout = () => {
   const [searchText, setSearchText] = useState('');
-  const { characters, isLoading, isError } = useCharacter();
+  const [page, setPage] = useState(1);
+  const { isFetching, isError, data } = useGetCharactersQuery({ page: page });
 
   return (
     <HomeContainer>
       <TitleStyled variant="h1">Star Wars Characters</TitleStyled>
       <SearchComponent label="Search character..." onSearch={setSearchText} />
+      {!!!searchText && <PaginationComponent page={page} next={!!data?.next} onPageChange={setPage} />}
+      {isFetching && <CircularProgress sx={{ margin: '20px' }} />}
+      {isError && (
+        <Typography sx={{ margin: '20px' }} color="error">
+          Something went wrong.
+        </Typography>
+      )}
       <CharactersContainer container spacing={3}>
-        {characters
-          ?.filter((character) => character.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()))
+        {data?.characters
+          ?.filter((character: Character) =>
+            character.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+          )
           .map((character) => (
             <Grid2 size={6} key={character.id}>
               <CharacterItemComponent character={character} />

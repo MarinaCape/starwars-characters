@@ -1,9 +1,9 @@
 import { CharacterList, Gender } from '../../models/character';
-import { CharacterListResponse } from './character.model';
+import { CharacterListResponse, CharacterResponse } from './character.model';
 
 export const characterResponseMapper = (data: CharacterListResponse): CharacterList => ({
   ...data,
-  characters: data.results.map((item) => ({
+  characters: data.results.map((item: CharacterResponse) => ({
     ...item,
     id: extractIdFromUrl(item.url) ?? item.name,
     gender: item.gender as Gender,
