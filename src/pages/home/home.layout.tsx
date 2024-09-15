@@ -7,17 +7,24 @@ import { useGetCharactersQuery } from '../../store/services/characters-api';
 import PaginationComponent from '../../core/pagination/pagination.component';
 import { Character } from '../../models/character';
 import { theme } from '../../App.styles';
+import { useAppSelector } from '../../store/root.hooks';
+import { selectPage } from '../../store/slices/pagination.slice';
 
 const HomeLayout = () => {
   const [searchText, setSearchText] = useState('');
-  const [page, setPage] = useState(1);
+  const page = useAppSelector(selectPage);
   const { isFetching, isError, data } = useGetCharactersQuery({ page: page });
+
+  const filteredCharacters = () =>
+    data?.characters?.filter((character: Character) =>
+      character.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+    );
 
   return (
     <HomeContainer>
       <TitleStyled variant="h1">Star Wars Characters</TitleStyled>
       <SearchComponent label="Search character..." onSearch={setSearchText} />
-      {!!!searchText && <PaginationComponent page={page} next={!!data?.next} onPageChange={setPage} />}
+      {!!!searchText && <PaginationComponent page={page} next={!!data?.next} />}
       {isFetching && <CircularProgress sx={{ margin: theme.spacing(2) }} />}
       {isError && (
         <Typography sx={{ margin: theme.spacing(2) }} color="error">
@@ -25,15 +32,11 @@ const HomeLayout = () => {
         </Typography>
       )}
       <CharactersContainer container spacing={3}>
-        {data?.characters
-          ?.filter((character: Character) =>
-            character.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
-          )
-          .map((character) => (
-            <Grid2 size={6} key={character.id}>
-              <CharacterItemComponent character={character} />
-            </Grid2>
-          ))}
+        {filteredCharacters()?.map((character) => (
+          <Grid2 size={6} key={character.id}>
+            <CharacterItemComponent character={character} />
+          </Grid2>
+        ))}
       </CharactersContainer>
     </HomeContainer>
   );

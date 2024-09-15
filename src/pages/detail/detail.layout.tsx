@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { Character } from '../../models/character';
-import { ButtonBackStyled, DetailContainer, TitleStyled } from './detail.styles';
+import { ButtonBackStyled, DetailContainer } from './detail.styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import CharacterInfoComponent from './components/character-info.component';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ const DetailLayout = () => {
   const character = (location.state as Character) || {};
 
   const handleBack = () => {
-    navigate('/');
+    navigate(-1);
   };
   return (
     <DetailContainer>
