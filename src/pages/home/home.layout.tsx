@@ -7,12 +7,13 @@ import { useGetCharactersQuery } from '../../store/services/characters-api';
 import PaginationComponent from '../../core/pagination/pagination.component';
 import { Character } from '../../models/character';
 import { theme } from '../../App.styles';
-import { useAppSelector } from '../../store/root.hooks';
-import { selectPage } from '../../store/slices/pagination.slice';
+import { useAppDispatch, useAppSelector } from '../../store/root.hooks';
+import { resetPage, selectPage } from '../../store/slices/pagination.slice';
 
 const HomeLayout = () => {
   const [searchText, setSearchText] = useState('');
   const page = useAppSelector(selectPage);
+  const dispatch = useAppDispatch();
   const { isFetching, isError, data } = useGetCharactersQuery({ page: page });
 
   const filteredCharacters = () =>
@@ -20,10 +21,20 @@ const HomeLayout = () => {
       character.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
     );
 
+  const handleResetAll = () => {
+    dispatch(resetPage());
+    setSearchText('');
+  };
+
   return (
     <HomeContainer>
       <Typography variant="h1">Star Wars Characters</Typography>
-      <SearchComponent label="Search character..." onSearch={setSearchText} />
+      <SearchComponent
+        label="Search character..."
+        onChange={setSearchText}
+        onReset={handleResetAll}
+        value={searchText}
+      />
       {!!!searchText && <PaginationComponent page={page} next={!!data?.next} />}
       {isFetching && <CircularProgress sx={{ margin: theme.spacing(2) }} />}
       {isError && (

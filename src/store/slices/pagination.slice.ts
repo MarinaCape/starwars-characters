@@ -21,10 +21,13 @@ export const paginationSlice = createSlice({
         state.page -= 1;
       }
     },
+    resetPage: (state: PaginationState) => {
+      state.page = 1;
+    },
   },
 });
 
 export const selectPage = (state: RootState) => state.pagination.page;
 
-export const { nextPage, previusPage } = paginationSlice.actions;
+export const { nextPage, previusPage, resetPage } = paginationSlice.actions;
 export default paginationSlice.reducer;
