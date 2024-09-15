@@ -1,18 +1,18 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import HomeLayout from './pages/home/home.layout';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Route, Routes } from 'react-router-dom';
 import { theme } from './App.styles';
-
-const client = new QueryClient();
+import DetailLayout from './pages/detail/detail.layout';
 
 function App() {
   return (
-    <QueryClientProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <HomeLayout />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Routes>
+        <Route path="/" element={<HomeLayout />} />
+        <Route path="/character" element={<DetailLayout />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 

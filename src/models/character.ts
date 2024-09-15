@@ -16,7 +16,7 @@ export interface Character {
   birth_year: string;
   gender: Gender;
   homeworld: string;
-  films: string[];
+  films: StarWarsMovies[];
   species: string[];
   vehicles: string[];
   starships: string[];
@@ -26,3 +26,12 @@ export interface Character {
 }
 
 export type Gender = 'Male' | 'Female' | 'unknown' | 'n/a';
+
+export enum StarWarsMovies {
+  Episode1 = 'The Phantom Menace',
+  Episode2 = 'Attack of the Clones',
+  Episode3 = 'Revenge of the Sith',
+  Episode4 = 'A New Hope',
+  Episode5 = 'The Empire Strikes Back',
+  Episode6 = 'Return of the Jedi',
+}

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid2, Typography } from '@mui/material';
+import { CircularProgress, Grid2, Typography } from '@mui/material';
 import CharacterItemComponent from './components/character-item.component';
 import { CharactersContainer, HomeContainer, TitleStyled } from './home.styles';
 import SearchComponent from '../../core/search/search.component';
@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useGetCharactersQuery } from '../../store/services/characters-api';
 import PaginationComponent from '../../core/pagination/pagination.component';
 import { Character } from '../../models/character';
+import { theme } from '../../App.styles';
 
 const HomeLayout = () => {
   const [searchText, setSearchText] = useState('');
@@ -17,9 +18,9 @@ const HomeLayout = () => {
       <TitleStyled variant="h1">Star Wars Characters</TitleStyled>
       <SearchComponent label="Search character..." onSearch={setSearchText} />
       {!!!searchText && <PaginationComponent page={page} next={!!data?.next} onPageChange={setPage} />}
-      {isFetching && <CircularProgress sx={{ margin: '20px' }} />}
+      {isFetching && <CircularProgress sx={{ margin: theme.spacing(2) }} />}
       {isError && (
-        <Typography sx={{ margin: '20px' }} color="error">
+        <Typography sx={{ margin: theme.spacing(2) }} color="error">
           Something went wrong.
         </Typography>
       )}

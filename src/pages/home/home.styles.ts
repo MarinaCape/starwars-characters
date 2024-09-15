@@ -8,13 +8,12 @@ export const HomeContainer = styled(Box)({
   width: '100vw',
   background: '#121723',
   color: '#f3f4f6',
-  boxSizing: 'border-box',
 });
 
-export const CharactersContainer = styled(Grid2)({
-  margin: '2.7rem',
+export const CharactersContainer = styled(Grid2)(({ theme }) => ({
+  margin: theme.spacing(3),
   maxWidth: '70%',
-});
+}));
 
 export const TitleStyled = styled(Typography)({
   fontWeight: 700,

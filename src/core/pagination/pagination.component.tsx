@@ -1,6 +1,7 @@
 import { ButtonStyled, PaginationContainer, TypographyPageStyled } from './pagination.styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 interface PaginationProps {
   page: number;
   next: boolean;
