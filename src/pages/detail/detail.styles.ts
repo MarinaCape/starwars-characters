@@ -8,7 +8,6 @@ export const TitleStyled = styled(Typography)({
   fontWeight: 700,
   fontSize: '3.5rem',
   lineHeight: 1.5,
-  color: '#ffdb2d',
 });
 
 export const ButtonBackStyled = styled(Button)(({ theme }) => ({

@@ -1,6 +1,6 @@
 import { CircularProgress, Grid2, Typography } from '@mui/material';
 import CharacterItemComponent from './components/character-item.component';
-import { CharactersContainer, HomeContainer, TitleStyled } from './home.styles';
+import { CharactersContainer, HomeContainer } from './home.styles';
 import SearchComponent from '../../core/search/search.component';
 import { useState } from 'react';
 import { useGetCharactersQuery } from '../../store/services/characters-api';
@@ -22,7 +22,7 @@ const HomeLayout = () => {
 
   return (
     <HomeContainer>
-      <TitleStyled variant="h1">Star Wars Characters</TitleStyled>
+      <Typography variant="h1">Star Wars Characters</Typography>
       <SearchComponent label="Search character..." onSearch={setSearchText} />
       {!!!searchText && <PaginationComponent page={page} next={!!data?.next} />}
       {isFetching && <CircularProgress sx={{ margin: theme.spacing(2) }} />}

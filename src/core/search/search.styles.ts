@@ -7,11 +7,11 @@ export const SearchContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const IconButtonStyled = styled(IconButton)(({ theme }) => ({
-  backgroundColor: '#ffdb2d',
+  backgroundColor: theme.palette.secondary.main,
   marginLeft: theme.spacing(2),
   color: 'black',
   '&:hover': {
-    backgroundColor: '#ffdb2d',
+    backgroundColor: theme.palette.secondary.main,
   },
   borderRadius: '8px',
   padding: theme.spacing(2),
@@ -39,10 +39,6 @@ export const TextFieldStyled = styled(TextField)({
     },
     '&.Mui-focused fieldset': {
       border: '2px solid #7F8590',
-    },
-    '& .MuiInputBase-input::placeholder': {
-      color: 'red',
-      opacity: 1,
     },
   },
   '& .MuiInputLabel-root': {

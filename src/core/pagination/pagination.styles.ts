@@ -5,7 +5,6 @@ export const PaginationContainer = styled(Box)(({ theme }) => ({
   minWidth: '70%',
   justifyContent: 'space-between',
   alignItems: 'center',
-  color: '#ffdb2d',
   marginTop: theme.spacing(4),
 }));
 
