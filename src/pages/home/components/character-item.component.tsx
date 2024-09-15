@@ -1,4 +1,4 @@
-import { CardContent, CardHeader, Typography } from '@mui/material';
+import { CardHeader, Typography } from '@mui/material';
 import { Character } from '../../../models/character';
 import { CardContentStyled, CardStyled } from './character-item.styles';
 

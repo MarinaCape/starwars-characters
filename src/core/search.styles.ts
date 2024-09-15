@@ -1,4 +1,4 @@
-import { Box, IconButton, styled, TextField, Typography } from '@mui/material';
+import { Box, IconButton, styled, TextField } from '@mui/material';
 
 export const SearchContainer = styled(Box)(({ theme }) => ({
   minWidth: '70%',

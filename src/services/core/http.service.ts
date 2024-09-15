@@ -14,8 +14,15 @@ const replaceUrlParams = (url: string, params?: Record<string, unknown>) => {
 };
 
 const request = async <T>(requestData: HttpModel.HttpData): Promise<T> => {
-  console.log('url', import.meta.env.VITE_APP_API_URL);
-  const { method, url, params = {}, body = {}, responseType = 'json', headers = {}, baseURL = import.meta.env.VITE_APP_API_URL } = requestData;
+  const {
+    method,
+    url,
+    params = {},
+    body = {},
+    responseType = 'json',
+    headers = {},
+    baseURL = import.meta.env.VITE_APP_API_URL,
+  } = requestData;
 
   const response: AxiosResponse<T> = await httpInstance.request({
     url: replaceUrlParams(url, params),

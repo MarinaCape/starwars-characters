@@ -1,4 +1,4 @@
-import { CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import HomeLayout from './pages/home/home.layout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { theme } from './App.styles';
